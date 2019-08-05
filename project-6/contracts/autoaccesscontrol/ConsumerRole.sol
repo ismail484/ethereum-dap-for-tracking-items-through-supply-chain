@@ -1,10 +1,12 @@
-pragma solidity >=0.5.0;
+pragma solidity >=0.4.24;
 
 // Import the library 'Roles'
 import "./Roles.sol";
 
 // Define a contract 'ConsumerRole' to manage this role - add, remove, check
 contract ConsumerRole {
+
+using Roles for Roles.Role;
 
   // Define 2 events, one for Adding, and other for Removing
    event ConsumerIsAdded(address indexed account);
@@ -20,7 +22,7 @@ contract ConsumerRole {
 
   // Define a modifier that checks to see if msg.sender has the appropriate role
   modifier onlyConsumer() {
-    require(isConsumer(msg.sender));
+    require(isConsumer(msg.sender), "Not Consumer");
     _;
   }
 
